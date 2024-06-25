@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hisedu.project.doctor.mapper.DoctorMapper">
+
+    <resultMap type="Doctor" id="DoctorResult">
+        <id     property="id"      column="id"      />
+        <result property="idcode"    column="idcode"    />
+        <result property="name"     column="name"     />
+        <result property="orders"   column="orders"   />
+        <result property="jianjie"    column="jianjie"    />
+        <result property="status"      column="status"      />
+        <result property="ksid"    column="ksid"    />
+        <result property="ksname"    column="ksname"    />
+    </resultMap>
+
+    <sql id="selectConfigVo">
+        select *
+        from tab_doctor
+    </sql>
+
+    <select id="selectConfigList" parameterType="Doctor" resultMap="DoctorResult">
+        <include refid="selectConfigVo"/>
+        <!--        <where>-->
+        <!--            <if test="configName != null and configName != ''">-->
+        <!--                AND config_name like concat('%', #{configName}, '%')-->
+        <!--            </if>-->
+        <!--            <if test="configType != null and configType != ''">-->
+        <!--                AND config_type = #{configType}-->
+        <!--            </if>-->
+        <!--            <if test="configKey != null and configKey != ''">-->
+        <!--                AND config_key like concat('%', #{configKey}, '%')-->
+        <!--            </if>-->
+        <!--            <if test="params.beginTime != null and params.beginTime != ''">&lt;!&ndash; 开始时间检索 &ndash;&gt;-->
+        <!--                and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')-->
+        <!--            </if>-->
+        <!--            <if test="params.endTime != null and params.endTime != ''">&lt;!&ndash; 结束时间检索 &ndash;&gt;-->
+        <!--                and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')-->
+        <!--            </if>-->
+        <!--        </where>-->
+    </select>
+</mapper>
