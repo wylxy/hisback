@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper
 public interface DoctorMapper {
 
-    public List<Doctor> selectConfigList();
+    public List<Doctor> selectConfigList(DoctorConfig dc);
 }

@@ -20,24 +20,21 @@
         from tab_doctor
     </sql>
 
-    <select id="selectConfigList" parameterType="Doctor" resultMap="DoctorResult">
+    <select id="selectConfigList" parameterType="DoctorConfig" resultMap="DoctorResult">
         <include refid="selectConfigVo"/>
-        <!--        <where>-->
-        <!--            <if test="configName != null and configName != ''">-->
-        <!--                AND config_name like concat('%', #{configName}, '%')-->
-        <!--            </if>-->
-        <!--            <if test="configType != null and configType != ''">-->
-        <!--                AND config_type = #{configType}-->
-        <!--            </if>-->
-        <!--            <if test="configKey != null and configKey != ''">-->
-        <!--                AND config_key like concat('%', #{configKey}, '%')-->
-        <!--            </if>-->
-        <!--            <if test="params.beginTime != null and params.beginTime != ''">&lt;!&ndash; 开始时间检索 &ndash;&gt;-->
-        <!--                and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')-->
-        <!--            </if>-->
-        <!--            <if test="params.endTime != null and params.endTime != ''">&lt;!&ndash; 结束时间检索 &ndash;&gt;-->
-        <!--                and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')-->
-        <!--            </if>-->
-        <!--        </where>-->
+                <where>
+                    <if test="idcode != null and idcode != ''">
+                        AND idcode = #{idcode}
+                    </if>
+                    <if test="name != null and name != ''">
+                        AND name like concat('%', #{name}, '%')
+                    </if>
+                    <if test="status != null and status != ''">
+                        AND status = #{status}
+                    </if>
+                    <if test="ksname != null and ksname != ''"><!-- 开始时间检索 -->
+                        AND ksname = #{ksname}
+                    </if>
+                </where>
     </select>
 </mapper>

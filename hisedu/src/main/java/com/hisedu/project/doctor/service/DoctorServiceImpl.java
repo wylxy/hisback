@@ -16,7 +16,7 @@ public class DoctorServiceImpl implements DoctorService{
     private DoctorMapper doctorMapper;
     @Override
     public List<Doctor> selectConfigList(DoctorConfig dc) {
-        return doctorMapper.selectConfigList();
+        return doctorMapper.selectConfigList(dc);
 //        return null;
     }
 }
