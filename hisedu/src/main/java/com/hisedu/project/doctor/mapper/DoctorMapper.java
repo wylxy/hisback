@@ -10,4 +10,15 @@ import java.util.List;
 public interface DoctorMapper {
 
     public List<Doctor> selectConfigList(DoctorConfig dc);
+
+    public Boolean addDoctor(Doctor dc);
+
+    public Boolean updateDoctor(Doctor dc);
+
+    public Doctor getLastDoctor();
+
+    Doctor getOne(Integer id);
+    public Boolean deleteOne(String id);
+    public List<Doctor> getDoctorSelect(Integer ksid);
+    Boolean updateState(Integer id, String status);
 }

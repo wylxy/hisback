@@ -37,4 +37,69 @@
                     </if>
                 </where>
     </select>
+
+    <select id="getDoctorSelect" resultMap="DoctorResult">
+        <include refid="selectConfigVo"/>
+        <where>
+            <if test="ksid != null and ksid != ''"><!-- 开始时间检索 -->
+                AND ksid = #{ksid}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addDoctor" useGeneratedKeys="true" keyProperty="id">
+        insert into tab_doctor( idcode,name, orders, jianjie, status,ksid,ksname) values ( #{idcode}, #{name}, #{orders}, #{jianjie}, #{status}, #{ksid}, #{ksname})
+    </insert>
+
+    <select id="getLastDoctor" resultType="Doctor">
+        SELECT * FROM tab_doctor ORDER BY id DASC LIMIT 1
+    </select>
+
+    <select id="getOne" resultType="Doctor">
+        SELECT * FROM tab_doctor
+        where id = #{id}
+    </select>
+
+    <update id="updateDoctor" parameterType="Doctor">
+        update tab_doctor
+        <set>
+            <if test="idcode != null and idcode != ''">
+                idcode = #{idcode},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="ksname != null and ksname != ''"><!-- 开始时间检索 -->
+                ksname = #{ksname},
+            </if>
+            <if test="ksid != null and ksid != ''"><!-- 开始时间检索 -->
+                ksid = #{ksid},
+            </if>
+            <if test="jianjie != null and jianjie != ''"><!-- 开始时间检索 -->
+                jianjie = #{jianjie},
+            </if>
+            <if test="orders != null and orders != ''"><!-- 开始时间检索 -->
+                orders = #{orders}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOne" >
+        delete from tab_doctor where id in (${ids})
+    </delete>
+
+
+    <update id="updateState" parameterType="Doctor">
+        update tab_doctor
+        <set>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>
