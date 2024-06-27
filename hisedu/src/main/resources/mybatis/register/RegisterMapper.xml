@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hisedu.project.register.mapper.RegisterMapper">
+
+	<resultMap type="Register" id="RegisterResult">
+		<result column="id" property="id" />
+		<result column="case_number" property="caseNumber" />
+		<result column="real_name" property="realName" />
+		<result column="gender" property="gender" />
+		<result column="card_number" property="cardNumber" />
+		<result column="birthday" property="birthday" />
+		<result column="age" property="age" />
+		<result column="age_type" property="ageType" />
+		<result column="home_address" property="homeAddress" />
+		<result column="regist_money" property="registMoney" />
+		<result column="visit_date" property="visitDate" />
+		<result column="noon" property="noon" />
+		<result column="deptment_id" property="deptmentId" />
+		<result column="employee_id" property="employeeId" />
+		<result column="regist_level" property="registLevel" />
+		<result column="settle_category" property="settleCategory" />
+		<result column="is_book" property="isBook" />
+		<result column="regist_method" property="registMethod" />
+		<result column="visit_state" property="visitState" />
+		<result column="deptment_name" property="deptmentName" />
+		<result column="employee_name" property="employeeName" />
+	</resultMap>
+
+	<sql id="selectRegisterVo">
+        select *
+		from tab_register
+    </sql>
+
+	<select id="selectRegisterList" parameterType="Register" resultMap="RegisterResult">
+	    <include refid="selectRegisterVo"/>
+		<where>
+		    <if test="caseNumber != null and caseNumber != ''">
+				AND case_number like concat('%', #{caseNumber}, '%')
+			</if>
+			<if test="realName != null and realName != ''">
+				AND real_name like concat('%', #{realName}, '%')
+			</if>
+			<if test="gender != null and gender != ''">
+				AND gender = #{gender}
+			</if>
+			<if test="cardNumber != null and cardNumber != ''">
+				AND card_number like concat('%', #{cardNumber}, '%')
+			</if>
+			<if test="deptmentId != null and deptmentId != ''">
+				AND deptment_id = #{deptmentId}
+			</if>
+			<if test="employeeId != null and employeeId != ''">
+				AND employee_id = #{employeeId}
+			</if>
+			<if test="registLevel != null and registLevel != ''">
+				AND regist_level = #{registLevel}
+			</if>
+			<if test="settleCategory != null and settleCategory != ''">
+				AND settle_category = #{settleCategory}
+			</if>
+			<if test="registMethod != null and registMethod != ''">
+				AND regist_method = #{registMethod}
+			</if>
+			<if test="visitState != null and visitState != ''">
+				AND visit_state = #{visitState}
+			</if>
+		</where>
+		order by visit_date desc
+	</select>
+
+	<insert id="insertRegister" parameterType="Register">
+		insert into tab_register(
+		<if test="caseNumber != null and caseNumber != ''">case_number,</if>
+		<if test="realName != null and realName != ''">real_name,</if>
+		<if test="gender != null and gender != ''">gender,</if>
+		<if test="cardNumber != null and cardNumber != ''">card_number,</if>
+		<if test="birthday != null ">birthday,</if>
+		<if test="age != null and age != ''">age,</if>
+		<if test="ageType != null and ageType != ''">age_type,</if>
+		<if test="homeAddress != null and homeAddress != ''">home_address,</if>
+		<if test="registMoney != null and registMoney != ''">regist_money,</if>
+		<if test="visitDate != null ">visit_date,</if>
+		<if test="noon != null and noon != ''">noon,</if>
+		<if test="deptmentId != null and deptmentId != ''">deptment_id,</if>
+		<if test="employeeId != null and employeeId != ''">employee_id,</if>
+		<if test="registLevel != null and registLevel != ''">regist_level,</if>
+		<if test="settleCategory != null and settleCategory != ''">settle_category,</if>
+		<if test="isBook != null and isBook != ''">is_book,</if>
+		<if test="registMethod != null and registMethod != ''">regist_method</if>
+		)values(
+		<if test="caseNumber != null and caseNumber != ''">#{caseNumber},</if>
+		<if test="realName != null and realName != ''">#{realName},</if>
+		<if test="gender != null and gender != ''">#{gender},</if>
+		<if test="cardNumber != null and cardNumber != ''">#{cardNumber},</if>
+		<if test="birthday != null ">#{birthday},</if>
+		<if test="age != null and age != ''">#{age},</if>
+		<if test="ageType != null and ageType != ''">#{ageType},</if>
+		<if test="homeAddress != null and homeAddress != ''">#{homeAddress},</if>
+		<if test="registMoney != null and registMoney != ''">#{registMoney},</if>
+		<if test="visitDate != null ">#{visitDate},</if>
+		<if test="noon != null and noon != ''">#{noon},</if>
+		<if test="deptmentId != null and deptmentId != ''">#{deptmentId},</if>
+		<if test="employeeId != null and employeeId != ''">#{employeeId},</if>
+		<if test="registLevel != null and registLevel != ''">#{registLevel},</if>
+		<if test="settleCategory != null and settleCategory != ''">#{settleCategory},</if>
+		<if test="isBook != null and isBook != ''">#{isBook},</if>
+		<if test="registMethod != null and registMethod != ''">#{registMethod}</if>
+		)
+	</insert>
+
+		<update id="updateRegister" parameterType="Register">
+	 		update tab_register
+	 		<set>
+				<if test="caseNumber != null and caseNumber != ''">case_number = #{caseNumber},</if>
+				<if test="realName != null and realName != ''">real_name = #{realName},</if>
+				<if test="gender != null and gender != ''">gender = #{gender},</if>
+				<if test="cardNumber != null and cardNumber != ''">card_number = #{cardNumber},</if>
+				<if test="birthday != null ">birthday = #{birthday},</if>
+				<if test="age != null and age != ''">age = #{age},</if>
+				<if test="ageType != null and ageType != ''">age_type = #{ageType},</if>
+				<if test="homeAddress != null and homeAddress != ''">home_address = #{homeAddress},</if>
+				<if test="registMoney != null and registMoney != ''">regist_money = #{registMoney},</if>
+				<if test="visitDate != null ">visit_date = #{visitDate},</if>
+				<if test="noon != null and noon != ''">noon = #{noon},</if>
+				<if test="deptmentId != null and deptmentId != ''">deptment_id = #{deptmentId},</if>
+				<if test="employeeId != null and employeeId != ''">employee_id = #{employeeId},</if>
+				<if test="registLevel != null and registLevel != ''">regist_level = #{registLevel},</if>
+				<if test="settleCategory != null and settleCategory != ''">settle_category = #{settleCategory},</if>
+				<if test="isBook != null and isBook != ''">is_book = #{isBook},</if>
+				<if test="registMethod != null and registMethod != ''">regist_method = #{registMethod}</if>
+
+	 		</set>
+	 		where id = #{id}
+		</update>
+	<select id="selectRegisterById" resultMap="RegisterResult" >
+	    select * from tab_register where id = #{id}
+	</select>
+
+	<delete id="deleteRegisterById" parameterType="Long">
+ 		delete from tab_register where id = #{id}
+ 	</delete>
+
+ 	<delete id="deleteRegisterByIds" parameterType="Long">
+		delete from tab_register where id in
+ 		<foreach collection="ids" item="id" open="(" separator="," close=")">
+ 			#{id}
+        </foreach>
+ 	</delete>
+</mapper>
